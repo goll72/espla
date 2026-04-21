@@ -1,0 +1,27 @@
+[package]
+edition      = "2024"
+name         = "espla"
+version      = "0.1.0"
+
+[dependencies]
+esp-hal = { version = "~1.0", features = ["esp32", "log-04", "unstable"] }
+esp-bootloader-esp-idf = { version = "0.4.0", features = ["esp32", "log-04"] }
+log = "0.4.27"
+critical-section = "1.2.0"
+esp-alloc = "0.9.0"
+esp-println = { version = "0.17.0", features = ["esp32", "log-04"] }
+ssd1306 = "0.10.0"
+embedded-graphics = "0.8.2"
+esp-backtrace = { version = "0.19.0", features = ["esp32", "println", "panic-handler"] }
+
+[profile.dev]
+opt-level = "s"
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+opt-level = "s"
+
+[profile.release.package."*"]
+codegen-units = 1
+opt-level = "s"
